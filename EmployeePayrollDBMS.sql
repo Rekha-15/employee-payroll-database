@@ -21,3 +21,13 @@ CREATE TABLE employee_payroll		# It is use to create a tablein the database
       SELECT salary FROM employee_payroll where name  = 'Bill';  #Selecting Bill entry
       SELECT * FROM employee_payroll                             #selecting employee from data range
 	  WHERE start BETWEEN CAST('2019-01-01' AS DATE) AND DATE(NOW());
+      
+      #Add the gender column in employee_payroll using ALTER command like delete,add,etc 
+	 ALTER TABLE employee_payroll ADD gender CHAR(1) AFTER name;
+     describe employee_payroll;
+     SET SQL_SAFE_UPDATES=0;
+     
+     #Data stored in table using 'update' command.
+	 update employee_payroll set gender = 'F' where name = 'Terise';
+     update employee_payroll set gender = 'M' where name = 'Bill' or name = 'Charlie';
+     SELECT * FROM employee_payroll;

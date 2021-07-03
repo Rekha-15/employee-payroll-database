@@ -90,3 +90,69 @@ C4:Retrieve all the employee payroll data that is added to payroll service datab
 	|  2 | Terise  | 2000000 | 2017-11-13 |
 	|  3 | Charlie | 3000000 | 2020-05-21 |
 	+----+---------+---------+------------+
+
+UC5:Retrieve salary data for a particular employee as well as all employees who have joined in a particular data range.
+Solution:
+	//View the particular salary given a name like Bill:10000.
+	SELECT salary FROM employee_payroll where name  = 'Bill';            #Selecting Bill entry
+	+---------+
+	| salary  |
+	+---------+
+	| 1000000 |
+	+---------+
+	
+	//Using condition start salary using BETWEEN CAST AND DATE (NOW()).
+ 
+	 SELECT * FROM employee_payroll                                         #selecting employee from data range
+
+        //The SQL CAST function is mainly used to convert the expression from one data type to another data type
+
+    	WHERE start BETWEEN CAST('2019-01-01' AS DATE) AND DATE(NOW());
+	+----+---------+---------+------------+
+	| id | name    | salary  | start      |
+	+----+---------+---------+------------+
+	|  1 | Bill    | 1000000 | 2019-01-03 |
+	|  3 | Charlie | 3000000 | 2020-05-21 |
+	+----+---------+---------+------------+
+
+UC6:Add Gender to Employee Payroll Table and Update the Rows to reflect the correct Employee Gender.
+Solution:
+	//Add the gender column in employee_payroll using ALTER command like delete,add,etc 
+	 ALTER TABLE employee_payroll ADD gender CHAR(1) AFTER names;
+	
+	describe employee_payroll;
+	+--------+--------------+------+-----+---------+----------------+
+	| Field  | Type         | Null | Key | Default | Extra          |
+	+--------+--------------+------+-----+---------+----------------+
+	| id     | int unsigned | NO   | PRI | NULL    | auto_increment |
+	| names  | varchar(150) | NO   |     | NULL    |                |
+	| gender | char(1)      | YES  |     | NULL    |                |
+	| salary | double       | NO   |     | NULL    |                |
+	| start  | date         | NO   |     | NULL    |                |
+	+--------+--------------+------+-----+---------+----------------+
+	
+	
+	//Data stored in table using 'update' command.
+	 update employee_payroll set gender = 'F' where names = 'Terise';
+	
+	 SELECT * FROM employee_payroll;
+	+----+---------+--------+---------+------------+
+	| id | names   | gender | salary  | start      |
+	+----+---------+--------+---------+------------+
+	|  1 | Bill    | NULL   | 1000000 | 2019-01-03 |
+	|  2 | Terise  | F      | 2000000 | 2017-11-13 |
+	|  3 | Charlie | NULL   | 3000000 | 2020-05-21 |
+	+----+---------+--------+---------+------------+
+	
+	//Data stored in table using 'update' command.
+	update employee_payroll set gender = 'M' where names = 'Bill' or names = 'Charlie';
+	
+	//View the Database.
+	SELECT * FROM employee_payroll;
+	+----+---------+--------+---------+------------+
+	| id | names   | gender | salary  | start      |
+	+----+---------+--------+---------+------------+
+	|  1 | Bill    | M      | 1000000 | 2019-01-03 |
+	|  2 | Terise  | F      | 2000000 | 2017-11-13 |
+	|  3 | Charlie | M      | 3000000 | 2020-05-21 |
+	+----+---------+--------+---------+------------+
