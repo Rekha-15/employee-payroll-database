@@ -38,3 +38,15 @@ CREATE TABLE employee_payroll		# It is use to create a tablein the database
 	SELECT gender, COUNT(name) FROM employee_payroll GROUP BY gender;
     #Find the Sum of the salary accourding to a field (like gender) using SUM() command.
 	SELECT gender, SUM(salary) FROM employee_payroll GROUP BY gender;
+    
+    #Add a column in a table like: phone number.
+	ALTER TABLE employee_payroll ADD phone_number VARCHAR(13) AFTER name;
+    #Add a column in a table like:address.
+	ALTER TABLE employee_payroll ADD address VARCHAR(150) AFTER phone_number;
+    #Add Default Value for address field.
+	ALTER TABLE employee_payroll ALTER address SET DEFAULT 'TBD';
+    #Ensure employee department is non nullable fields.
+	ALTER TABLE employee_payroll ADD department VARCHAR(20) NOT NULL AFTER address;
+    #View a table in a display. 
+	DESCRIBE employee_payroll;
+    SELECT * FROM employee_payroll;
