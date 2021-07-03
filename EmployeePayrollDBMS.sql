@@ -5,10 +5,15 @@ use payroll_service;
 CREATE TABLE employee_payroll		# It is use to create a tablein the database
      (
      id       INT unsigned NOT NULL AUTO_INCREMENT,
-     name     VARCHAR (100) NOT NULL,
+     name     VARCHAR (150) NOT NULL,
      salary   Double NOT NULL,
      start    Date NOT NULL,
      PRIMARY KEY  (id)			# Primary key is use to Create a id as a unique.
      );
-     DESCRIBE employee_payroll;		# It is use to display the table.
-     Select*from employee_payroll;
+     drop table employee_payroll;
+    #Insert a data in a particular database using 'INSERT'command.
+     INSERT INTO employee_payroll (name, salary, start) VALUES  
+   	  ('Bill', '1000000.00', '2019-01-03'),
+   	  ('Terise', '2000000.00', '2017-11-13'),
+	  ('Charlie', '3000000.00', '2020-05-21');
+	  SELECT * FROM employee_payroll;

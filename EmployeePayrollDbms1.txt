@@ -59,3 +59,22 @@ Solution:
 	| salary | double       | NO   |     | NULL    |                |
 	| start  | date         | NO   |     | NULL    |                |
 	+--------+--------------+------+-----+---------+----------------+
+
+UC3 Create employee payroll data in the payroll service database.
+Solution:
+	//Insert a data in a particular database using 'INSERT'command.
+	INSERT INTO employee_payroll (name,salary,start) VALUES
+   	 -> ('Bill', 1000000.00, '2019-01-03'),
+   	 -> ('Terise', 2000000.00, '2017-11-13'),
+    	 -> ('Charlie', 3000000.00, '2020-05-21');
+
+	
+	//Show a data in a display using 'SELECT'command.
+	 SELECT * FROM employee_payroll;
+	+----+---------+---------+------------+
+	| id | name    | salary  | start      |
+	+----+---------+---------+------------+
+	|  1 | Bill    | 1000000 | 2019-01-03 |
+	|  2 | Terise  | 2000000 | 2017-11-13 |
+	|  3 | Charlie | 3000000 | 2020-05-21 |
+	+----+---------+---------+------------+
