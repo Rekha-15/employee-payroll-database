@@ -156,3 +156,31 @@ Solution:
 	|  2 | Terise  | F      | 2000000 | 2017-11-13 |
 	|  3 | Charlie | M      | 3000000 | 2020-05-21 |
 	+----+---------+--------+---------+------------+
+
+UC7:Find sum, average, min, max and number of male and female employees.
+Solution:
+	//Find  Average salary according to a gender (like M )using AVG() command; 
+	SELECT AVG(salary) FROM employee_payroll WHERE gender = 'M' GROUP BY gender;
+	+-------------+
+	| AVG(salary) |
+	+-------------+
+	|     2000000 |
+	+-------------+
+	
+	//Count the no of fields (like name) using COUNT() command.
+        SELECT gender, COUNT(name) FROM employee_payroll GROUP BY gender;
+	+--------+--------------+
+	| gender | COUNT(name) |
+	+--------+--------------+
+	| M      |            2 |
+	| F      |            1 |
+	+--------+--------------+
+
+	//Find the Sum of the salary accourding to a field (like gender) using SUM() command.
+	SELECT gender, SUM(salary) FROM employee_payroll GROUP BY gender;
+	+--------+-------------+
+	| gender | SUM(salary) |
+	+--------+-------------+
+	| M      |     4000000 |
+	| F      |     2500000 |
+	+--------+-------------+

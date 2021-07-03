@@ -31,3 +31,10 @@ CREATE TABLE employee_payroll		# It is use to create a tablein the database
 	 update employee_payroll set gender = 'F' where name = 'Terise';
      update employee_payroll set gender = 'M' where name = 'Bill' or name = 'Charlie';
      SELECT * FROM employee_payroll;
+     
+     #Find  Average salary according to a gender (like M )using AVG() command; 
+	SELECT AVG(salary) FROM employee_payroll WHERE gender = 'M' GROUP BY gender;
+    #Count the no of fields (like name) using COUNT() command.
+	SELECT gender, COUNT(name) FROM employee_payroll GROUP BY gender;
+    #Find the Sum of the salary accourding to a field (like gender) using SUM() command.
+	SELECT gender, SUM(salary) FROM employee_payroll GROUP BY gender;
