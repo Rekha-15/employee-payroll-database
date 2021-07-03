@@ -17,3 +17,7 @@ CREATE TABLE employee_payroll		# It is use to create a tablein the database
    	  ('Terise', '2000000.00', '2017-11-13'),
 	  ('Charlie', '3000000.00', '2020-05-21');
 	  SELECT * FROM employee_payroll;
+      #uc5
+      SELECT salary FROM employee_payroll where name  = 'Bill';  #Selecting Bill entry
+      SELECT * FROM employee_payroll                             #selecting employee from data range
+	  WHERE start BETWEEN CAST('2019-01-01' AS DATE) AND DATE(NOW());
