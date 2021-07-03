@@ -3,10 +3,10 @@
 UC1: Ability to create a payroll service database.
 Solution:
 	//To Create a Database using 'CREATE' command like:payroll_service.
- 	mysql> CREATE DATABASE payroll_service;	
-
+        CREATE DATABASE payroll_service;	
+	Query OK, 
 	//To Show the Database using 'show; command.
-	mysql> show databases;
+	show databases;
 	+--------------------+
 	| Database           |
 	+--------------------+
@@ -20,13 +20,42 @@ Solution:
 	+--------------------+
 	
 	//You want to choose a database using 'USE' command like:payroll_service.
-	mysql> USE payroll_service;
+	 USE payroll_service;
 	Database changed
 
 	//Select a particular database using 'SELECT' command.
-	mysql> SELECT DATABASE();
+	 SELECT DATABASE();
 	+-----------------+
 	| DATABASE()      |
 	+-----------------+
 	| payroll_service |
-	+-----------------+1 row in set (0.00 sec)
+	+-----------------+
+	
+
+
+UC2:Create a employee payroll table in the payroll service database.
+Solution:
+	//To Create a Table using 'CREATE TABLE' command in particular database like employee_payroll.
+	 CREATE TABLE employee_payroll
+    	 (
+    	 	id      INT unsigned NOT NULL AUTO_INCREMENT,  #Unique ID for the record
+    	 	name     VARCHAR(150) NOT NULL,                #Names of Employee
+    	 	salary   Double NOT NULL,                      #Employee Salary
+    		start    DATE NOT NULL,                        #Employee Start Date
+    	 	PRIMARY KEY (id)                               #Make id primary key
+    	 );
+
+	
+	//Show a table in a display using 'DESCRIBE'command.
+
+	 DESCRIBE employee_payroll;
+              Select*from employee_payroll;
+
+	+--------+--------------+------+-----+---------+----------------+
+	| Field  | Type         | Null | Key | Default | Extra          |
+	+--------+--------------+------+-----+---------+----------------+
+	| id     | int unsigned | NO   | PRI | NULL    | auto_increment |
+	| name   | varchar(150) | NO   |     | NULL    |                |
+	| salary | double       | NO   |     | NULL    |                |
+	| start  | date         | NO   |     | NULL    |                |
+	+--------+--------------+------+-----+---------+----------------+
