@@ -215,3 +215,101 @@ Solution:
 	| salary       | double       | NO   |     | NULL    |                |
 	| start        | date         | NO   |     | NULL    |                |
 	+--------------+--------------+------+-----+---------+----------------+
+
+UC9 // ALTER TABLE employee_payroll ADD deductions,Taxable_pay, tax,net_pay
+
+mysql> ALTER TABLE employee_payroll ADD deductions Double NOT NULL AFTER basic_p		# Alter table by adding deductions
+ay;
+Query OK, 0 rows affected (1.75 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE employee_payroll ADD taxable_pay Double NOT NULL AFTER deduct		# Alter table by adding taxable_pay
+ions;
+Query OK, 0 rows affected (1.34 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE employee_payroll ADD tax Double NOT NULL AFTER taxable_pay;			# Alter table by adding tax
+Query OK, 0 rows affected (1.15 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE employee_payroll ADD net_pay Double NOT NULL AFTER tax;			# Alter table by adding net_pay
+Query OK, 0 rows affected (1.72 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> describe employee_payroll;
++--------------+--------------+------+-----+---------+----------------+
+| Field        | Type         | Null | Key | Default | Extra          |
++--------------+--------------+------+-----+---------+----------------+
+| id           | int unsigned | NO   | PRI | NULL    | auto_increment |
+| name         | varchar(100) | NO   |     | NULL    |                |
+| phone_number | varchar(250) | YES  |     | NULL    |                |
+| address      | varchar(250) | YES  |     | TBD     |                |
+| department   | varchar(250) | NO   |     | NULL    |                |
+| gender       | char(1)      | YES  |     | NULL    |                |
+| basic_pay    | double       | NO   |     | NULL    |                |
+| deductions   | double       | NO   |     | NULL    |                |
+| taxable_pay  | double       | NO   |     | NULL    |                |
+| tax          | double       | NO   |     | NULL    |                |
+| net_pay      | double       | NO   |     | NULL    |                |
+| start        | date         | NO   |     | NULL    |                |
++--------------+--------------+------+-----+---------+----------------+
+12 rows in set (0.06 sec)
+
+UC10 // Added two terisa with different department.
+
+mysql> INSERT INTO employee_payroll
+    -> (name, department, gender, basic_pay, deductions, taxable_pay, tax, net_p
+ay, start) VALUES
+    -> ('Terisa' , 'Marketting','F',300000.00,100000.00,200000.00,500000.00,1000
+000.00,'2018-01-02');
+Query OK, 1 row affected (0.38 sec)
+
+mysql> SELECT * from employee_payroll;
++----+---------+--------------+---------+------------+--------+-----------+-----
+-------+-------------+--------+---------+------------+
+| id | name    | phone_number | address | department | gender | basic_pay | dedu
+ctions | taxable_pay | tax    | net_pay | start      |
++----+---------+--------------+---------+------------+--------+-----------+-----
+-------+-------------+--------+---------+------------+
+|  6 | Bill    | NULL         | NULL    |            | M      |    100000 |
+     0 |           0 |      0 |       0 | 2018-01-03 |
+|  7 | Terisa  | NULL         | NULL    |            | F      |    300000 |
+     0 |           0 |      0 |       0 | 2019-11-13 |
+|  8 | Charile | NULL         | NULL    |            | M      |    300000 |
+     0 |           0 |      0 |       0 | 2020-02-21 |
+|  9 | Terisa  | NULL         | TBD     | Marketting | F      |    300000 |
+100000 |      200000 | 500000 | 1000000 | 2018-01-02 |
++----+---------+--------------+---------+------------+--------+-----------+-----
+-------+-------------+--------+---------+------------+
+4 rows in set (0.06 sec)
+
+mysql> SELECT * from employee_payroll;
+ERROR 2013 (HY000): Lost connection to MySQL server during query
+No connection. Trying to reconnect...
+Connection id:    16
+Current database: payroll_service
+
++----+---------+--------------+---------+------------+--------+-----------+------------+-------------+--------+---------+------------+
+| id | name    | phone_number | address | department | gender | basic_pay | deductions | taxable_pay | tax    | net_pay | start      |
++----+---------+--------------+---------+------------+--------+-----------+------------+-------------+--------+---------+------------+
+|  6 | Bill    | NULL         | NULL    |            | M      |    0      |          0 |           0 |      0 |       0 | 2018-01-03 |
+|  7 | Terisa  | NULL         | NULL    |            | F      |    300000 |          0 |           0 |      0 |       0 | 2019-11-13 |
+|  8 | Charile | NULL         | NULL    |            | M      |    0      |          0 |           0 |      0 |       0 | 2020-02-21 |
+|  9 | Terisa  | NULL         | TBD     | Marketting | F      |    300000 |     100000 |      200000 | 500000 | 1000000 | 2018-01-02 |
++----+---------+--------------+---------+------------+--------+-----------+------------+-------------+--------+---------+------------+
+4 rows in set (0.21 sec)
+
+mysql> UPDATE employee_payroll SET department="Sales" WHERE id=7;
+Query OK, 1 row affected (0.08 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT * from employee_payroll;
++----+---------+--------------+---------+------------+--------+-----------+------------+-------------+--------+---------+------------+
+| id | name    | phone_number | address | department | gender | basic_pay | deductions | taxable_pay | tax    | net_pay | start      |
++----+---------+--------------+---------+------------+--------+-----------+------------+-------------+--------+---------+------------+
+|  6 | Bill    | NULL         | NULL    |            | M      |    0      |          0 |           0 |      0 |       0 | 2018-01-03 |
+|  7 | Terisa  | NULL         | NULL    | Sales      | F      | 300000    |          0 |           0 |      0 |       0 | 2019-11-13 |
+|  8 | Charile | NULL         | NULL    |            | M      |    0           0       |           0 |      0 |       0 | 2020-02-21 |
+|  9 | Terisa  | NULL         | TBD     | Marketting | F      |    300000 |     100000 |      200000 | 500000 | 1000000 | 2018-01-02 |
++----+---------+--------------+---------+------------+--------+-----------+------------+-------------+--------+---------+------------+
+4 rows in set (0.00 sec)
