@@ -50,3 +50,20 @@ CREATE TABLE employee_payroll		# It is use to create a tablein the database
     #View a table in a display. 
 	DESCRIBE employee_payroll;
     SELECT * FROM employee_payroll;
+   ALTER TABLE employee_payroll RENAME COLUMN salary TO basic_pay;
+    #UC9 // ALTER TABLE employee_payroll ADD deductions,Taxable_pay, tax,net_pay
+# Alter table by adding deductions
+ ALTER TABLE employee_payroll ADD deductions Double NOT NULL AFTER basic_pay;
+# Alter table by adding taxable_pay
+ ALTER TABLE employee_payroll ADD taxable_pay Double NOT NULL AFTER deductions;
+# Alter table by adding tax
+ ALTER TABLE employee_payroll ADD tax Double NOT NULL AFTER taxable_pay;			
+# Alter table by adding net_pay
+ ALTER TABLE employee_payroll ADD net_pay Double NOT NULL AFTER tax;			
+ describe employee_payroll;
+ 
+ #UC10 // Added two terisa with different department.
+ INSERT INTO employee_payroll
+(name, department, gender, basic_pay, deductions, taxable_pay, tax, net_pay, start) VALUES
+('Terisa' , 'Marketting','F',300000.00,100000.00,200000.00,500000.00,1000000.00,'2018-01-02');
+ SELECT * from employee_payroll;
